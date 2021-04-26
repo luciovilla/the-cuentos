@@ -1,65 +1,80 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import { useState } from 'react'
+import { useAuth } from '../lib/auth'
+import { getAllCuentos } from '../lib/db-admin'
 
-export default function Home() {
+import {
+  Flex,
+  Heading,
+  Box,
+  FormControl,
+  FormLabel,
+  Textarea,
+  FormErrorMessage,
+} from '@chakra-ui/react'
+
+import EmptyState from '../components/EmptyState'
+import SignedIn from '../components/SignedIn'
+import Nav from '../components/Nav'
+import CuentosList from '../components/CuentosList'
+
+export default function Home({ allCuentos }) {
+  const auth = useAuth()
+  const [TextValue, setTextValue] = useState('')
+  let handleInputChange = (e) => {
+    let inputValue = e.target.value
+    setTextValue(inputValue)
+  }
+
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+    <Flex direction="column" align="center" justify="center" as="main">
+      <Flex
+        bg="brand.light"
+        alignItems="stretch"
+        justifyContent="space-between"
+        flexDirection="column"
+        w="100%"
+      >
+        <Nav />
+        <Flex
+          display="flex"
+          maxW="1000px"
+          w="100%"
+          mx="auto"
+          mt={40}
+          justifyContent={['center', 'space-between']}
+          flexWrap="wrap"
         >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
-    </div>
+          <Heading as="h1" size="2xl" maxW="500px" p={4}>
+            A community space gathering advice for and by first-generation Latinos.
+          </Heading>
+          <FormControl p={6} maxW="sm" boxShadow="lg" rounded="md" bg="white">
+            <FormLabel>What advice do you want to share?</FormLabel>
+            <Textarea
+              placeholder="Tell us your cuento."
+              mb={2}
+              px="2"
+              value={TextValue}
+              onChange={handleInputChange}
+            />
+            <FormErrorMessage>Error message</FormErrorMessage>
+
+            {auth.user ? <SignedIn text={TextValue} /> : <EmptyState text={TextValue} />}
+          </FormControl>
+        </Flex>
+        <Box maxW="1000px" mt="40" mx="auto">
+          <CuentosList cuentos={allCuentos} />
+        </Box>
+      </Flex>
+    </Flex>
   )
+}
+
+export async function getStaticProps(context) {
+  const { cuentos } = await getAllCuentos()
+
+  return {
+    props: {
+      allCuentos: cuentos,
+    },
+  }
 }
