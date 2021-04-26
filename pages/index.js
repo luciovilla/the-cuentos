@@ -71,7 +71,7 @@ export default function Home({ allCuentos }) {
             )}
           </FormControl>
         </Flex>
-        <Box maxW="1000px" mt="40" mx="auto">
+        <Box maxW="1000px" mt="40" mx="auto" w="100%">
           <CuentosList cuentos={allCuentos} />
         </Box>
       </Flex>
