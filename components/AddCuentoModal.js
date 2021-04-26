@@ -1,3 +1,4 @@
+import { useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import { mutate } from 'swr'
 import {
@@ -23,6 +24,7 @@ const AddCuentoModal = ({ children }) => {
   const auth = useAuth()
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { handleSubmit, register } = useForm()
+  const inputEl = useRef(null)
 
   const onCreateCuento = ({ text }) => {
     const newCuento = {
@@ -42,11 +44,12 @@ const AddCuentoModal = ({ children }) => {
     mutate(
       ['/api/cuentos', auth.user.token],
       async (data) => ({
-        cuentos: [...data.cuentos, { id, ...newCuento }],
+        cuentos: [{ id, ...newCuento }, ...data.cuentos],
       }),
       false
     )
     onClose()
+    inputEl.current.value = ''
   }
 
   return (
@@ -71,7 +74,7 @@ const AddCuentoModal = ({ children }) => {
           <ModalCloseButton />
           <ModalBody pb={6}>
             <FormControl>
-              <Textarea placeholder="My Cuento" name="text" {...register('text')} />
+              <Textarea placeholder="My Cuento" name="text" {...register('text')} ref={inputEl} />
             </FormControl>
           </ModalBody>
 
