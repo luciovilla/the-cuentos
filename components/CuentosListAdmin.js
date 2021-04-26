@@ -1,7 +1,8 @@
 import { SimpleGrid, Text, Box, Heading } from '@chakra-ui/react'
 import { parseISO, format } from 'date-fns'
+import DeleteCuentoButton from './DeleteCuentoButton'
 
-const CuentosList = ({ cuentos }) => {
+const CuentosListAdmin = ({ cuentos }) => {
   return (
     <SimpleGrid columns={[2, null, 3]} spacing="40px">
       {cuentos.map((cuento) => (
@@ -13,11 +14,15 @@ const CuentosList = ({ cuentos }) => {
             </Text>
           )}
           <Text fontSize="xs" color="GrayText" mt="2">
+            <Text as="span" fontWeight="bold">
+              Date added:
+            </Text>{' '}
             {format(parseISO(cuento.createdAt), 'PP')}
           </Text>
+          <DeleteCuentoButton cuentoId={cuento.id} />
         </Box>
       ))}
     </SimpleGrid>
   )
 }
-export default CuentosList
+export default CuentosListAdmin
