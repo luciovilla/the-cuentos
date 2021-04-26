@@ -1,5 +1,5 @@
 import useSWR from 'swr'
-import CuentosList from '../components/CuentosList'
+import CuentosListAdmin from '../components/CuentosListAdmin'
 import DashboardShell from '../components/DashboardShell'
 import Loading from '../components/Loading'
 import fetcher from '../lib/fetcher'
@@ -19,7 +19,7 @@ const Dashboard = () => {
 
   return (
     <DashboardShell>
-      {data.cuentos ? <CuentosList cuentos={data.cuentos} /> : <Loading />}
+      {data.cuentos ? <CuentosListAdmin cuentos={data.cuentos} /> : <Loading />}
     </DashboardShell>
   )
 }
