@@ -32,7 +32,7 @@ const Nav = () => {
         <Flex justifyContent="center" alignItems="center">
           <NextLink href="/account" passHref>
             <Link>
-              <Avatar size="sm" src={user?.photoURL} />
+              <Avatar size="sm" src={user?.photoUrl} />
             </Link>
           </NextLink>
         </Flex>
