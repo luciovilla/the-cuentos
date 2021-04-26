@@ -26,12 +26,12 @@ const AddCuentoModal = ({ children }) => {
 
   const onCreateCuento = ({ text }) => {
     const newCuento = {
-      authorId: auth.user.uid,
+      uid: auth.user.uid,
       createdAt: new Date().toISOString(),
-      text: text,
-      name: auth.user.displayName,
+      text,
+      name: auth.user.name,
     }
-    const { id } = createCuento(newCuento)
+    createCuento(newCuento)
     toast({
       title: 'Success!',
       description: "We've added your cuento.",
@@ -42,7 +42,7 @@ const AddCuentoModal = ({ children }) => {
     mutate(
       ['/api/cuentos', auth.user.token],
       async (data) => {
-        return { cuentos: [{ id, ...newCuento }, ...data.cuentos] }
+        return { cuentos: [...data.cuentos, newCuento] }
       },
       false
     )
