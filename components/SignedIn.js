@@ -2,23 +2,23 @@ import { useAuth } from '../lib/auth'
 import { Button, Stack, useToast } from '@chakra-ui/react'
 import { createCuento } from '../lib/db'
 
-export default function SignedIn({ text }) {
+export default function SignedIn({ text, handleSubmitEnd }) {
   const auth = useAuth()
   const toast = useToast()
   const handleSubmit = (text) => {
-    console.log(auth.user, 'user!')
     // need to add logic to not submit if empty
     const formatTextSubmission = {
-      cuento: text,
+      text,
       uid: auth.user.uid,
-      name: auth.user.displayName,
+      name: auth.user.name,
       createdAt: new Date().toISOString(),
     }
     console.log(formatTextSubmission, 'hiii')
     createCuento(formatTextSubmission)
+    handleSubmitEnd()
     toast({
-      title: 'Cuento submitted!',
-      description: "We've submitted your advice.",
+      title: 'Success!',
+      description: "We've submitted your cuento.",
       status: 'success',
       duration: 5000,
       isClosable: true,
