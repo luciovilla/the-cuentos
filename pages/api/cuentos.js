@@ -1,18 +1,12 @@
-import db from '../../lib/firebase-admin'
+import { auth } from '../../lib/firebase-admin'
+import { getUserCuentos } from '../../lib/db-admin'
 
-export default async (_, res) => {
-  // const userSnapshot = await db.collection('users').get()
-  const cuentosSnapshot = await db.collection('cuentos').get()
-  const cuentos = []
-  const users = []
-
-  // userSnapshot.forEach((doc) => {
-  //   users.push({ ...doc.data() })
-  // })
-  cuentosSnapshot.forEach((doc) => {
-    cuentos.push({ ...doc.data() })
-  })
-  // const userCuentos = cuentos.map((item, i) => Object.assign({}, item, users[i]))
-
-  res.status(200).json({ cuentos })
+export default async (req, res) => {
+  try {
+    const { uid } = await auth.verifyIdToken(req.headers.token)
+    const { cuentos } = await getUserCuentos(uid)
+    res.status(200).json({ cuentos })
+  } catch (error) {
+    res.status(500).json({ error })
+  }
 }
