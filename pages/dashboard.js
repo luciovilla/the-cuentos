@@ -2,12 +2,12 @@ import useSWR from 'swr'
 import CuentosList from '../components/CuentosList'
 import DashboardShell from '../components/DashboardShell'
 import Loading from '../components/Loading'
-import fetcher from '../lib/fetcher';
+import fetcher from '../lib/fetcher'
 import { useAuth } from '../lib/auth'
 
 const Dashboard = () => {
-  const auth = useAuth()
-  const { data } = useSWR('/api/cuentos', fetcher);
+  const { user } = useAuth()
+  const { data } = useSWR(user ? ['/api/cuentos', user.token] : null, fetcher)
 
   if (!data) {
     return (
