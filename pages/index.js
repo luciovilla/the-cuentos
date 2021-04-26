@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useRouter } from 'next/router'
 import { useAuth } from '../lib/auth'
 import { getAllCuentos } from '../lib/db-admin'
 
@@ -19,10 +20,15 @@ import CuentosList from '../components/CuentosList'
 
 export default function Home({ allCuentos }) {
   const auth = useAuth()
+  const router = useRouter()
   const [TextValue, setTextValue] = useState('')
   let handleInputChange = (e) => {
     let inputValue = e.target.value
     setTextValue(inputValue)
+  }
+  const handleSubmitEnd = () => {
+    setTextValue('')
+    router.push('/dashboard')
   }
 
   return (
@@ -58,7 +64,11 @@ export default function Home({ allCuentos }) {
             />
             <FormErrorMessage>Error message</FormErrorMessage>
 
-            {auth.user ? <SignedIn text={TextValue} /> : <EmptyState text={TextValue} />}
+            {auth.user ? (
+              <SignedIn text={TextValue} handleSubmitEnd={handleSubmitEnd} />
+            ) : (
+              <EmptyState text={TextValue} />
+            )}
           </FormControl>
         </Flex>
         <Box maxW="1000px" mt="40" mx="auto">
