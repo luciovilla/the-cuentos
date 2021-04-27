@@ -7,10 +7,8 @@ import {
   AlertDialogHeader,
   AlertDialogContent,
   AlertDialogOverlay,
-  IconButton,
   Button,
 } from '@chakra-ui/react'
-import { DeleteIcon } from '@chakra-ui/icons'
 
 import { deleteCuento } from '../lib/db'
 import { useAuth } from '../lib/auth'
@@ -39,10 +37,10 @@ const DeleteCuentoButton = ({ cuentoId }) => {
     <>
       <Button
         aria-label="Delete Cuento"
-        leftIcon={<DeleteIcon />}
-        mt="4"
-        py="3.5"
-        size="xs"
+        ml="1"
+        variant="ghost"
+        size="sm"
+        fontSize="xs"
         onClick={() => setIsOpen(true)}
       >
         Remove
@@ -58,7 +56,7 @@ const DeleteCuentoButton = ({ cuentoId }) => {
             <Button ref={cancelRef} onClick={onClose}>
               Cancel
             </Button>
-            <Button variantColor="red" onClick={onDelete} ml={3}>
+            <Button variant="red" onClick={onDelete} ml={3}>
               Delete
             </Button>
           </AlertDialogFooter>

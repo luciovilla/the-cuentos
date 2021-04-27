@@ -1,10 +1,9 @@
-import { Flex, IconButton, Link, Button, Box, Avatar } from '@chakra-ui/react'
-import { PhoneIcon } from '@chakra-ui/icons'
+import { Flex, Text, Link, Button, Box, Avatar } from '@chakra-ui/react'
 import { useAuth } from '../lib/auth'
 import NextLink from 'next/link'
 
 const Nav = () => {
-  const { user } = useAuth()
+  const { user, signinWithGoogle, signout } = useAuth()
 
   return (
     <Flex
@@ -20,17 +19,36 @@ const Nav = () => {
       />
       <Flex justifyContent="space-between">
         <Flex p={4}>
-          <IconButton colorScheme="teal" aria-label="Logo" icon={<PhoneIcon />} />
+          <NextLink href="/" passHref>
+            <Link>
+              <Text fontWeight="extrabold">THE CUENTOS</Text>
+            </Link>
+          </NextLink>
         </Flex>
         <Flex justifyContent="space-around" alignItems="center" p="10px">
-          <Link p={4}>Home</Link>
-          <Link p={4}>About</Link>
-          <Button variant="solid" size="md" p={4}>
-            Sign In
-          </Button>
-        </Flex>
-        <Flex justifyContent="center" alignItems="center">
-          <NextLink href="/account" passHref>
+          <NextLink href="/" passHref>
+            <Link p={1} fontWeight="light" mx="2">
+              Home
+            </Link>
+          </NextLink>
+          {user ? (
+            <>
+              <NextLink href="/dashboard" passHref>
+                <Link p={1} fontWeight="light" mx="2">
+                  My Cuentos
+                </Link>
+              </NextLink>
+              <Button variant="solid" size="sm" onClick={() => signout('/')} mx="2" p={1}>
+                Sign Out
+              </Button>
+            </>
+          ) : (
+            <Button variant="solid" size="md" onClick={() => signinWithGoogle()} mx="2">
+              Sign In
+            </Button>
+          )}
+
+          <NextLink href="/dashboard" passHref>
             <Link>
               <Avatar size="sm" src={user?.photoUrl} />
             </Link>
