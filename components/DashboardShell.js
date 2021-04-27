@@ -3,6 +3,7 @@ import { Box, Heading, Flex } from '@chakra-ui/react'
 import { NextSeo } from 'next-seo'
 import AddCuentoModal from './AddCuentoModal'
 import Nav from './Nav'
+import Footer from './Footer'
 
 const title = 'The Cuentos – Dashboard'
 const url = 'https://thecuentos.com/dashboard'
@@ -19,7 +20,7 @@ const DashboardShell = ({ children }) => {
         }}
       />
       <Nav />
-      <Box mt="20" maxW="1000px" mx="auto">
+      <Box mt="20" maxW="1000px" mx="auto" minH="60vh">
         <Flex margin="0 auto" direction="column" maxW="1250px" px={8}>
           <Flex justifyContent="space-between">
             <Heading mb={8}>My Cuentos</Heading>
@@ -28,6 +29,7 @@ const DashboardShell = ({ children }) => {
           {children}
         </Flex>
       </Box>
+      <Footer />
     </>
   )
 }

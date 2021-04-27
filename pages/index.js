@@ -73,7 +73,7 @@ export default function Home({ allCuentos }) {
           maxW="1000px"
           w="100%"
           mx="auto"
-          mt={40}
+          mt={[10, null, 40]}
           justifyContent={['center', 'space-between']}
           flexWrap="wrap"
         >
@@ -81,7 +81,9 @@ export default function Home({ allCuentos }) {
             A community space gathering advice for and by first-generation Latinos.
           </Heading>
           <FormControl
-            p={6}
+            px={4}
+            py={6}
+            mx={4}
             maxW="sm"
             boxShadow="lg"
             rounded="md"
@@ -114,7 +116,7 @@ export default function Home({ allCuentos }) {
           <CuentosList cuentos={allCuentos} />
         </Box>
       </Flex>
-      <Footer/>
+      <Footer />
     </Flex>
   )
 }
