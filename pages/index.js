@@ -1,8 +1,9 @@
-import { useState } from 'react'
-import { useRouter } from 'next/router'
+import { useState, useRef } from 'react'
 import { useAuth } from '../lib/auth'
-import { getAllCuentos } from '../lib/db-admin'
-
+import { useForm } from 'react-hook-form'
+import { useRouter } from 'next/router'
+import { getAllApprovedCuentos } from '../lib/db-admin'
+import { mutate } from 'swr'
 import {
   Flex,
   Heading,
@@ -10,24 +11,49 @@ import {
   FormControl,
   FormLabel,
   Textarea,
+  Button,
   FormErrorMessage,
+  FormHelperText,
+  useToast,
 } from '@chakra-ui/react'
 
 import EmptyState from '../components/EmptyState'
-import SignedIn from '../components/SignedIn'
+import { createCuento } from '../lib/db'
 import Nav from '../components/Nav'
 import CuentosList from '../components/CuentosList'
 
 export default function Home({ allCuentos }) {
   const auth = useAuth()
   const router = useRouter()
+  const toast = useToast()
+  const inputEl = useRef(null)
+  const { handleSubmit, register } = useForm()
   const [TextValue, setTextValue] = useState('')
-  let handleInputChange = (e) => {
-    let inputValue = e.target.value
-    setTextValue(inputValue)
-  }
-  const handleSubmitEnd = () => {
-    setTextValue('')
+
+  const onCreateCuento = ({ text }) => {
+    const newCuento = {
+      uid: auth.user.uid,
+      createdAt: new Date().toISOString(),
+      text,
+      name: auth.user.name,
+      status: 'pending',
+    }
+    const { id } = createCuento(newCuento)
+    toast({
+      title: 'Success!',
+      description: "We've added your cuento.",
+      status: 'success',
+      duration: 5000,
+      isClosable: true,
+    })
+    mutate(
+      ['/api/cuentos', auth.user.token],
+      async (data) => ({
+        cuentos: [{ id, ...newCuento }, ...data.cuentos],
+      }),
+      false
+    )
+    inputEl.current.value = ''
     router.push('/dashboard')
   }
 
@@ -53,19 +79,31 @@ export default function Home({ allCuentos }) {
           <Heading as="h1" size="2xl" maxW="500px" p={4}>
             A community space gathering advice for and by first-generation Latinos.
           </Heading>
-          <FormControl p={6} maxW="sm" boxShadow="lg" rounded="md" bg="white">
+          <FormControl
+            p={6}
+            maxW="sm"
+            boxShadow="lg"
+            rounded="md"
+            bg="white"
+            as="form"
+            onSubmit={handleSubmit(onCreateCuento)}
+          >
             <FormLabel>What advice do you want to share?</FormLabel>
             <Textarea
               placeholder="Tell us your cuento."
-              mb={2}
               px="2"
-              value={TextValue}
-              onChange={handleInputChange}
+              {...register('text')}
+              ref={inputEl}
             />
             <FormErrorMessage>Error message</FormErrorMessage>
+            <FormHelperText mb={4} mt={0} fontStyle="italic" fontSize="xs">
+              * In 30 words or less.
+            </FormHelperText>
 
             {auth.user ? (
-              <SignedIn text={TextValue} handleSubmitEnd={handleSubmitEnd} />
+              <Button fontWeight="medium" type="submit">
+                Submit
+              </Button>
             ) : (
               <EmptyState text={TextValue} />
             )}
@@ -80,7 +118,7 @@ export default function Home({ allCuentos }) {
 }
 
 export async function getStaticProps(context) {
-  const { cuentos } = await getAllCuentos()
+  const { cuentos } = await getAllApprovedCuentos()
 
   return {
     props: {
