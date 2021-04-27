@@ -21,6 +21,7 @@ import EmptyState from '../components/EmptyState'
 import { createCuento } from '../lib/db'
 import Nav from '../components/Nav'
 import CuentosList from '../components/CuentosList'
+import Footer from '../components/Footer'
 
 export default function Home({ allCuentos }) {
   const auth = useAuth()
@@ -113,6 +114,7 @@ export default function Home({ allCuentos }) {
           <CuentosList cuentos={allCuentos} />
         </Box>
       </Flex>
+      <Footer/>
     </Flex>
   )
 }
