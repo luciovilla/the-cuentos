@@ -27,14 +27,14 @@ const Nav = () => {
         </Flex>
         <Flex justifyContent="space-around" alignItems="center" p="10px">
           <NextLink href="/" passHref>
-            <Link p={1} fontWeight="light" mx="2">
+            <Link p={1} fontWeight="light" mx="2" display={['none', 'block']}>
               Home
             </Link>
           </NextLink>
           {user ? (
             <>
               <NextLink href="/dashboard" passHref>
-                <Link p={1} fontWeight="light" mx="2">
+                <Link p={1} fontWeight="light" mx="2" fontSize="sm">
                   My Cuentos
                 </Link>
               </NextLink>
@@ -43,7 +43,7 @@ const Nav = () => {
               </Button>
             </>
           ) : (
-            <Button variant="solid" size="md" onClick={() => signinWithGoogle()} mx="2">
+            <Button variant="solid" size="sm" onClick={() => signinWithGoogle()} mx="2">
               Sign In
             </Button>
           )}
