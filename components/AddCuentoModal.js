@@ -32,6 +32,7 @@ const AddCuentoModal = ({ children }) => {
       createdAt: new Date().toISOString(),
       text,
       name: auth.user.name,
+      status: 'pending',
     }
     const { id } = createCuento(newCuento)
     toast({
