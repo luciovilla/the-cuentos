@@ -26,9 +26,9 @@ const Nav = () => {
           </NextLink>
         </Flex>
         <Flex justifyContent="space-around" alignItems="center" p="10px">
-          <NextLink href="/" passHref>
-            <Link p={1} fontWeight="light" mx="2" display={['none', 'block']}>
-              Home
+          <NextLink href="/about" passHref>
+            <Link p={1} fontWeight="light" fontSize="sm" mx="2" display={['none', 'block']}>
+              About
             </Link>
           </NextLink>
           {user ? (
