@@ -1,4 +1,3 @@
-import { Flex, Text, Link, Button, Box, Avatar } from '@chakra-ui/react'
 import { useAuth } from '../lib/auth'
 import NextLink from 'next/link'
 
@@ -6,56 +5,49 @@ const Nav = () => {
   const { user, signinWithGoogle, signout } = useAuth()
 
   return (
-    <Flex
-      bg="brand.light"
-      alignItems="stretch"
-      justifyContent="space-between"
-      flexDirection="column"
-      w="100%"
-    >
-      <Box
-        bgGradient="linear(to-r,#ff2606,#000000,#ffcb10,#000000,#ffffff,#00c5eb,#0c47d7,#000000,#ffcb10,#11a37f,#000000, #ff2606)"
-        h="1"
+    <div className="w-full">
+      <div
+        className="h-1"
+        style={{
+          backgroundImage:
+            'linear-gradient(to right, #ff2606, #000000, #ffcb10, #000000, #ffffff, #00c5eb, #0c47d7, #000000, #ffcb10, #11a37f, #000000, #ff2606)',
+        }}
       />
-      <Flex justifyContent="space-between">
-        <Flex p={4}>
-          <NextLink href="/" passHref>
-            <Link>
-              <Text fontWeight="extrabold">THE CUENTOS</Text>
-            </Link>
+      <div className="flex justify-between items-center">
+        <div className="p-4">
+          <NextLink href="/">
+            <a className="font-bold">THE CUENTOS</a>
           </NextLink>
-        </Flex>
-        <Flex justifyContent="space-around" alignItems="center" p="10px">
+        </div>
+
+        <div className="justify-around items-center flex p-4">
           <NextLink href="/about" passHref>
-            <Link p={1} fontWeight="light" fontSize="sm" mx="2" display={['none', 'block']}>
-              About
-            </Link>
+            <a className="text-sm mx-2">About</a>
           </NextLink>
           {user ? (
             <>
-              <NextLink href="/dashboard" passHref>
-                <Link p={1} fontWeight="light" mx="2" fontSize="sm">
-                  My Cuentos
-                </Link>
+              <NextLink href="/dashboard">
+                <a className="mx-2 text-sm sm:block hidden">My Cuentos</a>
               </NextLink>
-              <Button variant="solid" size="sm" onClick={() => signout('/')} mx="2" p={1}>
+              <button className="mx-2 text-sm font-bold" onClick={() => signout('/')}>
                 Sign Out
-              </Button>
+              </button>
+              <NextLink href="/dashboard">
+                <a className="text-sm">
+                  <span className=" inline-flex items-center">
+                    <img src={user?.photoUrl} className="w-8 h-8 object-cover rounded-2xl" />
+                  </span>
+                </a>
+              </NextLink>
             </>
           ) : (
-            <Button variant="solid" size="sm" onClick={() => signinWithGoogle()} mx="2">
+            <button className="text-sm p-4" onClick={() => signinWithGoogle()}>
               Sign In
-            </Button>
+            </button>
           )}
-
-          <NextLink href="/dashboard" passHref>
-            <Link>
-              <Avatar size="sm" src={user?.photoUrl} />
-            </Link>
-          </NextLink>
-        </Flex>
-      </Flex>
-    </Flex>
+        </div>
+      </div>
+    </div>
   )
 }
 export default Nav
