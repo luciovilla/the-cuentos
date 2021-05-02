@@ -5,6 +5,7 @@ import theme from '../styles/theme'
 import SEO from '../next-seo.config'
 import { MDXProvider } from '@mdx-js/react'
 import MDX from '../components/MDX'
+import '../styles/globals.css'
 
 const App = ({ Component, pageProps }) => {
   return (
