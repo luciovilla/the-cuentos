@@ -41,7 +41,7 @@ const Nav = () => {
               </NextLink>
             </>
           ) : (
-            <button className="text-sm p-4" onClick={() => signinWithGoogle()}>
+            <button className="text-sm mx-2" onClick={() => signinWithGoogle('/dashboard')}>
               Sign In
             </button>
           )}
