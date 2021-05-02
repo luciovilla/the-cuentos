@@ -5,11 +5,8 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <link rel="preconnect" href="https://fonts.gstatic.com" />
-          <link
-            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
-            rel="stylesheet"
-          />
+          <link rel="preload" href="/fonts/inter-var.woff2" as="font" crossOrigin="anonymous" />
+
           {/* Global Site Tag (gtag.js) - Google Analytics */}
           <script
             async
