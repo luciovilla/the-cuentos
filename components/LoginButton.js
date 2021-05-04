@@ -27,7 +27,7 @@ export default function LoginButton() {
 
   return (
     <button
-      className="bg-white p-2 border rounded-md font-bold text-sm text-gray-700 mt-2"
+      className="bg-white p-2 border rounded-md font-bold text-xs sm:text-md text-gray-700 mt-2"
       onClick={(e) => auth.signinWithGoogle()}
     >
       <GoogleIcon /> Contribute with Google
