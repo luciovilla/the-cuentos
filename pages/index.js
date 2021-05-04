@@ -13,11 +13,19 @@ export default function Home({ allCuentos }) {
       <Nav />
       <main className="flex flex-col items-center justify-center">
         <div className="items-center justify-center flex-col w-full">
-          <div className="flex w-full max-w-4xl mx-auto mt-40 justify-center flex-wrap">
-            <h1 className="text-center text-5xl font-sans font-bold mb-2">
-              A community space gathering advice for and by first-generation Latinos.
+          <div className="flex w-full mx-auto mt-40 justify-center flex-col">
+            <h1 className="text-center mb-4">
+              <span className="text-6xl font-sans font-black block mb-2">The Cuentos</span>{' '}
+              <span className="max-w-lg block mx-auto text-2xl">
+                A community space gathering advice for and by first-generation Latinos.
+              </span>
             </h1>
-            {!auth.user && <LoginButton />}
+            <div className="mx-auto">
+              {!auth.user && <LoginButton />}
+              <button className="bg-gray-200 ml-4 px-4 py-2 border rounded-md font-bold text-sm text-gray-700 mt-2">
+                View Cuentos
+              </button>
+            </div>
           </div>
           <div className="max-w-4xl center mt-40 mx-auto w-full">
             <CuentosList cuentos={allCuentos} />
