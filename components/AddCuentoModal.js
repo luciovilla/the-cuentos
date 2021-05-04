@@ -5,7 +5,7 @@ import { useAuth } from '../lib/auth'
 
 const AddCuentoModal = ({ children }) => {
   const auth = useAuth()
-  const [text, setText] = useState(null)
+  const [text, setText] = useState('')
   const [isOpen, setOpen] = useState(false)
 
   const handleClose = (e) => {

@@ -1,15 +1,10 @@
-import React from 'react'
-import { Box } from '@chakra-ui/react'
-
 import Nav from './Nav'
 import Footer from './Footer'
 
 const DocsLayout = ({ children }) => (
   <>
     <Nav />
-    <Box maxW="650px" mx="auto" px={8} mt="40">
-      {children}
-    </Box>
+    <div className="max-w-2xl mx-auto mt-40 px-8">{children}</div>
     <Footer />
   </>
 )

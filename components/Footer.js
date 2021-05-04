@@ -1,30 +1,21 @@
 import NextLink from 'next/link'
-import { Link, Flex } from '@chakra-ui/react'
 
 const Footer = () => {
   return (
-    <Flex mb={8} mt={24} justify="center">
-      <NextLink href="/" passHref>
-        <Link fontSize="sm" mr={4} fontWeight="medium" color="gray.500">
-          Home
-        </Link>
+    <div className="mb-8 mt-20 justify-center flex">
+      <NextLink href="/">
+        <a className="text-sm mr-4 font-bold text-gray-500">Home</a>
       </NextLink>
-      <NextLink href="/about" passHref>
-        <Link fontSize="sm" mr={4} fontWeight="medium" color="gray.500">
-          About
-        </Link>
+      <NextLink href="/about">
+        <a className="text-sm mr-4 font-bold text-gray-500">About</a>
       </NextLink>
-      <NextLink href="/privacy-policy" passHref>
-        <Link fontSize="sm" mr={4} fontWeight="medium" color="gray.500">
-          Privacy Policy
-        </Link>
+      <NextLink href="/privacy-policy">
+        <a className="text-sm mr-4 font-bold text-gray-500">Privacy Policy</a>
       </NextLink>
-      <NextLink href="/terms" passHref>
-        <Link fontSize="sm" mr={4} fontWeight="medium" color="gray.500">
-          Terms
-        </Link>
+      <NextLink href="/terms">
+        <a className="text-sm mr-4 font-bold text-gray-500">Terms</a>
       </NextLink>
-    </Flex>
+    </div>
   )
 }
 

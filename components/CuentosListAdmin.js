@@ -1,26 +1,23 @@
-import { SimpleGrid, Text, Box, Heading } from '@chakra-ui/react'
 import { parseISO, format } from 'date-fns'
 import DeleteCuentoButton from './DeleteCuentoButton'
 import EditCuentoModal from './EditCuentoModal'
 
 const CuentosListAdmin = ({ cuentos }) => {
   return (
-    <SimpleGrid columns={[1, 2, 3]} spacing="40px">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
       {cuentos.map((cuento) => (
-        <Box key={cuento.id} background="white" p={4} key={cuento.createdAt}>
-          <Heading fontSize="md">“{cuento.text}”</Heading>
-          <Text fontSize="xs" color="GrayText" mt="2">
-            {format(parseISO(cuento.createdAt), 'PPp')}
-          </Text>
-          <Box mt="4">
+        <div className="bg-white p-4">
+          <h3 className="text-md font-bold">“{cuento.text}”</h3>
+          <p className="text-xs mt-2 text-gray-500">{format(parseISO(cuento.createdAt), 'PPp')}</p>
+          <div className="mt-4">
             <EditCuentoModal cuentoText={cuento.text} cuentoId={cuento.id}>
               Edit
             </EditCuentoModal>
             <DeleteCuentoButton cuentoId={cuento.id} />
-          </Box>
-        </Box>
+          </div>
+        </div>
       ))}
-    </SimpleGrid>
+    </div>
   )
 }
 export default CuentosListAdmin

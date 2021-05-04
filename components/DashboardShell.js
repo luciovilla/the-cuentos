@@ -1,5 +1,4 @@
 import React from 'react'
-import { Box, Heading, Flex } from '@chakra-ui/react'
 import { NextSeo } from 'next-seo'
 import AddCuentoModal from './AddCuentoModal'
 import Nav from './Nav'
@@ -20,15 +19,15 @@ const DashboardShell = ({ children }) => {
         }}
       />
       <Nav />
-      <Box mt="20" maxW="1000px" mx="auto" minH="60vh">
-        <Flex margin="0 auto" direction="column" maxW="1250px" px={8}>
-          <Flex justifyContent="space-between">
-            <Heading mb={8}>My Cuentos</Heading>
+      <div className="mt-20 max-w-4xl min-h-1/2 mx-auto">
+        <div className="mx-auto w-full flex flex-col px-8">
+          <div className="flex justify-between mb-8" justifyContent="space-between">
+            <h1 className="text-3xl font-bold">My Cuentos</h1>
             <AddCuentoModal>+ Add Cuento</AddCuentoModal>
-          </Flex>
+          </div>
           {children}
-        </Flex>
-      </Box>
+        </div>
+      </div>
       <Footer />
     </>
   )

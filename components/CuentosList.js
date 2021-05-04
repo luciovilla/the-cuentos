@@ -1,23 +1,16 @@
-import { SimpleGrid, Text, Box, Heading } from '@chakra-ui/react'
 import { parseISO, format } from 'date-fns'
 
 const CuentosList = ({ cuentos }) => {
   return (
-    <SimpleGrid columns={[1, 2, 3]} spacing="40px" px="4">
+    <div className="px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
       {cuentos.map((cuento) => (
-        <Box key={cuento.url} background="white" p={4} key={cuento.createdAt} rounded="sm">
-          <Heading fontSize="md">“{cuento.text}”</Heading>
-          {cuento.name && (
-            <Text fontSize="sm" mt={1}>
-              – {cuento.name}
-            </Text>
-          )}
-          <Text fontSize="xs" color="GrayText" mt="2">
-            {format(parseISO(cuento.createdAt), 'PP')}
-          </Text>
-        </Box>
+        <div className="bg-white p-4 rounded-md shadow-sm" key={cuento.createdAt}>
+          <h3 className="text-md font-bold leading-5">“{cuento.text}”</h3>
+          {cuento.name && <p className="text-sm mt-2">– {cuento.name}</p>}
+          <p className="text-xs text-gray-500 mt-2">{format(parseISO(cuento.createdAt), 'PP')}</p>
+        </div>
       ))}
-    </SimpleGrid>
+    </div>
   )
 }
 export default CuentosList
