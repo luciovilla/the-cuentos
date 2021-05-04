@@ -1,32 +1,20 @@
-import { useRef } from 'react'
-import { useForm } from 'react-hook-form'
+import { useState } from 'react'
 import { mutate } from 'swr'
-import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-  FormControl,
-  Button,
-  Textarea,
-  useToast,
-  useDisclosure,
-} from '@chakra-ui/react'
-
 import { createCuento } from '../lib/db'
 import { useAuth } from '../lib/auth'
 
 const AddCuentoModal = ({ children }) => {
-  const toast = useToast()
   const auth = useAuth()
-  const { isOpen, onOpen, onClose } = useDisclosure()
-  const { handleSubmit, register } = useForm()
-  const inputEl = useRef(null)
+  const [text, setText] = useState(null)
+  const [isOpen, setOpen] = useState(false)
 
-  const onCreateCuento = ({ text }) => {
+  const handleClose = (e) => {
+    e.preventDefault()
+    setOpen(false)
+  }
+  const handleSubmit = (e) => {
+    e.preventDefault()
+
     const newCuento = {
       uid: auth.user.uid,
       createdAt: new Date().toISOString(),
@@ -35,13 +23,6 @@ const AddCuentoModal = ({ children }) => {
       status: 'pending',
     }
     const { id } = createCuento(newCuento)
-    toast({
-      title: 'Success!',
-      description: "We've added your cuento.",
-      status: 'success',
-      duration: 5000,
-      isClosable: true,
-    })
     mutate(
       ['/api/cuentos', auth.user.token],
       async (data) => ({
@@ -49,46 +30,73 @@ const AddCuentoModal = ({ children }) => {
       }),
       false
     )
-    onClose()
-    inputEl.current.value = ''
+    setOpen(false)
+    setText('')
   }
 
   return (
     <>
-      <Button
-        onClick={onOpen}
-        backgroundColor="gray.900"
-        color="white"
-        fontWeight="medium"
-        _hover={{ bg: 'gray.700' }}
-        _active={{
-          bg: 'gray.800',
-          transform: 'scale(0.95)',
-        }}
+      <button
+        onClick={() => setOpen(true)}
+        className="rounded-md bg-gray-900 text-white font-bold hover:bg-gray-700 inline-flex items-center h-10 px-2"
       >
         {children}
-      </Button>
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent as="form" onSubmit={handleSubmit(onCreateCuento)}>
-          <ModalHeader fontWeight="bold">Add Cuento</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody pb={6}>
-            <FormControl>
-              <Textarea placeholder="My Cuento" name="text" {...register('text')} ref={inputEl} />
-            </FormControl>
-          </ModalBody>
+      </button>
+      <div
+        className={`fixed left-0 top-0 w-full h-screen bg-gray-900 opacity-30 ${
+          isOpen ? 'block' : 'hidden'
+        }`}
+      />
 
-          <ModalFooter>
-            <Button onClick={onClose} mr={3} fontWeight="medium">
-              Cancel
-            </Button>
-            <Button backgroundColor="#99FFFE" color="#194D4C" fontWeight="medium" type="submit">
-              Create
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+      <div
+        className={`flex mt-20 justify-center fixed h-screen w-full left-0 top-0 ${
+          isOpen ? '' : 'hidden'
+        }`}
+      >
+        <div className="">
+          <div className="mt-5 md:mt-0 md:col-span-3">
+            <form>
+              <div className="shadow sm:rounded-md sm:overflow-hidden">
+                <div className="px-4 py-5 bg-white space-y-6 sm:p-6">
+                  <div>
+                    <label htmlFor="about" className="block text-md font-medium text-gray-700">
+                      Add Cuento
+                    </label>
+                    <div className="mt-1">
+                      <textarea
+                        id="about"
+                        name="about"
+                        className="shadow-sm focus:ring-indigo-500 p-2 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md"
+                        placeholder="Your cuento..."
+                        value={text}
+                        onChange={(e) => setText(e.target.value)}
+                      />
+                    </div>
+                    <p className="mt-2 text-sm text-gray-500">
+                      Brief description for your profile. URLs are hyperlinked.
+                    </p>
+                  </div>
+                </div>
+                <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
+                  <button
+                    onClick={(e) => handleClose(e)}
+                    className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm mr-3 font-bold rounded-md text-white bg-indigo-300 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    onSubmit={(e) => handleSubmit(e)}
+                    className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-bold rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  >
+                    Submit
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </>
   )
 }
