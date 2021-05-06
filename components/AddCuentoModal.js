@@ -53,7 +53,7 @@ const AddCuentoModal = ({ children }) => {
           isOpen ? '' : 'hidden'
         }`}
       >
-        <div className="">
+        <div className="w-full max-w-sm">
           <div className="mt-5 md:mt-0 md:col-span-3">
             <form onSubmit={handleSubmit}>
               <div className="shadow sm:rounded-md sm:overflow-hidden">
@@ -72,21 +72,18 @@ const AddCuentoModal = ({ children }) => {
                         onChange={(e) => setText(e.target.value)}
                       />
                     </div>
-                    <p className="mt-2 text-sm text-gray-500">
-                      Brief description for your profile. URLs are hyperlinked.
-                    </p>
                   </div>
                 </div>
-                <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
+                <div className="px-4 py-3 bg-white text-right sm:px-6">
                   <button
                     onClick={(e) => handleClose(e)}
-                    className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm mr-3 font-bold rounded-md text-white bg-indigo-300 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-xs mr-3 font-bold rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
-                    className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-bold rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-xs font-bold rounded-md bg-gray-200 hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                   >
                     Submit
                   </button>

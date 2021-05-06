@@ -55,13 +55,13 @@ const EditCuentoModal = ({ children, cuentoText, cuentoId }) => {
               <div className="px-4 py-3 text-right sm:px-6">
                 <button
                   onClick={() => setOpen(false)}
-                  className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm mr-3 font-bold rounded-md text-white bg-indigo-300 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-xs mr-3 font-bold rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-bold rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-xs font-bold rounded-md bg-gray-200 hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2"
                 >
                   Submit
                 </button>
