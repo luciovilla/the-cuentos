@@ -2,7 +2,7 @@ import NextLink from 'next/link'
 
 const Footer = () => {
   return (
-    <div className="mb-8 mt-20 justify-center flex">
+    <div className="pb-8 mt-20 justify-center flex">
       <NextLink href="/">
         <a className="text-sm mr-4 text-gray-500">Home</a>
       </NextLink>

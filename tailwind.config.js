@@ -8,6 +8,9 @@ module.exports = {
       fontFamily: {
         sans: ['Inter', ...fontFamily.sans],
       },
+      colors: {
+        lightblue: '#ebf2f5',
+      },
     },
     minHeight: {
       0: '0',

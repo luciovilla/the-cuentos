@@ -11,7 +11,7 @@ export default function Home({ allCuentos }) {
   return (
     <>
       <Nav />
-      <main className="flex flex-col items-center justify-center">
+      <main className="flex min-h-full bg-lightblue flex-col items-center justify-center">
         <div className="items-center justify-center flex-col w-full">
           <div className="px-4 flex w-full mx-auto mt-40 justify-center flex-col">
             <h1 className="text-center mb-4">
