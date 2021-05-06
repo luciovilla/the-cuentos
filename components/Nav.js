@@ -5,7 +5,7 @@ const Nav = () => {
   const { user, signinWithGoogle, signout } = useAuth()
 
   return (
-    <div className="w-full">
+    <div className="w-full bg-lightblue">
       <div
         className="h-1"
         style={{
