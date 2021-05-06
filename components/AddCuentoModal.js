@@ -55,7 +55,7 @@ const AddCuentoModal = ({ children }) => {
       >
         <div className="">
           <div className="mt-5 md:mt-0 md:col-span-3">
-            <form>
+            <form onSubmit={handleSubmit}>
               <div className="shadow sm:rounded-md sm:overflow-hidden">
                 <div className="px-4 py-5 bg-white space-y-6 sm:p-6">
                   <div>
@@ -86,7 +86,6 @@ const AddCuentoModal = ({ children }) => {
                   </button>
                   <button
                     type="submit"
-                    onSubmit={(e) => handleSubmit(e)}
                     className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-bold rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                   >
                     Submit
