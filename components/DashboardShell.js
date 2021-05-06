@@ -9,7 +9,7 @@ const url = 'https://thecuentos.com/dashboard'
 
 const DashboardShell = ({ children }) => {
   return (
-    <>
+    <div className="bg-lightblue min-h-full">
       <NextSeo
         title={title}
         canonical={url}
@@ -29,7 +29,7 @@ const DashboardShell = ({ children }) => {
         </div>
       </div>
       <Footer />
-    </>
+    </div>
   )
 }
 
