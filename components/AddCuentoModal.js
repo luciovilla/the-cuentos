@@ -38,7 +38,7 @@ const AddCuentoModal = ({ children }) => {
     <>
       <button
         onClick={() => setOpen(true)}
-        className="rounded-md bg-gray-900 text-white font-bold hover:bg-gray-700 inline-flex items-center h-10 px-2"
+        className="rounded-md bg-white px-4 py-2 border font-bold text-xs sm:text-md text-gray-700 mt-2"
       >
         {children}
       </button>
