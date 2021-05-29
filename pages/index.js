@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { useAuth } from '../lib/auth'
 import { getAllApprovedCuentos } from '../lib/db-admin'
 import Nav from '../components/Nav'
@@ -11,27 +12,39 @@ export default function Home({ allCuentos }) {
   return (
     <>
       <Nav />
-      <main className="flex min-h-full bg-lightblue flex-col items-center justify-center">
-        <div className="items-center justify-center flex-col w-full">
-          <div className="px-4 flex w-full mx-auto mt-40 justify-center flex-col">
-            <h1 className="text-center mb-4">
-              <span className="text-4xl sm:text-6xl font-sans font-black block mb-2">
-                The Cuentos
-              </span>{' '}
-              <span className="max-w-lg block mx-auto text-xl sm:text-2xl">
-                A community space gathering advice for and by first-generation Latinos.
-              </span>
-            </h1>
-            <div className="mx-auto">
-              {!auth.user && <LoginButton />}
-              <button className="bg-gray-200 ml-4 px-4 py-2 border rounded-md font-bold text-xs sm:text-md text-gray-700 mt-2">
-                View Cuentos
-              </button>
-            </div>
+      <main className="min-h-full bg-lightblue">
+        <div className="px-4 w-full mx-auto pt-24">
+          <h1 className="text-center mb-4">
+            <span className="text-lg uppercase font-sans font-semibold text-gray-700 mb-2">
+              The Cuentos
+            </span>
+            <span className="max-w-xl block mx-auto font-sans font-bold tracking-tighter text-4xl sm:text-5xl">
+              A community space gathering advice for and by first-generation Latinos
+            </span>
+          </h1>
+          <div className="max-w-xl text-center mx-auto">
+            {auth.user ? (
+              <Link href="/dashboard">
+                <a>
+                  <button className="bg-white px-4 py-2 border rounded-md font-bold text-xs sm:text-md text-gray-700 mt-2">
+                    View/Submit Your Cuentos
+                  </button>
+                </a>
+              </Link>
+            ) : (
+              <LoginButton />
+            )}
+            <Link href="/all-cuentos">
+              <a className="ml-4">
+                <button className="bg-white px-4 py-2 border rounded-md font-bold text-xs sm:text-md text-gray-700 mt-2">
+                  View All Cuentos
+                </button>
+              </a>
+            </Link>
           </div>
-          <div className="max-w-4xl center mt-40 mx-auto w-full">
-            <CuentosList cuentos={allCuentos} />
-          </div>
+        </div>
+        <div className="max-w-4xl center mt-32 mx-auto w-full">
+          <CuentosList cuentos={allCuentos} simple={true} />
         </div>
         <Footer />
       </main>
