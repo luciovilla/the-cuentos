@@ -1,8 +1,8 @@
 import { useAuth } from '../lib/auth'
-import NextLink from 'next/link'
+import Link from 'next/link'
 
 const Nav = () => {
-  const { user, signinWithGoogle, signout } = useAuth()
+  const { user, signinWithGoogle } = useAuth()
 
   return (
     <div className="w-full bg-lightblue">
@@ -15,31 +15,26 @@ const Nav = () => {
       />
       <div className="flex justify-between items-center">
         <div className="p-4">
-          <NextLink href="/">
+          <Link href="/">
             <a className="font-bold">THE CUENTOS</a>
-          </NextLink>
+          </Link>
         </div>
 
         <div className="justify-around items-center flex p-4">
-          <NextLink href="/about" passHref>
+          <Link href="/about" passHref>
             <a className="text-sm mx-2">About</a>
-          </NextLink>
+          </Link>
+          <Link href="/all-cuentos" passHref>
+            <a className="text-sm mx-2">All Cuentos</a>
+          </Link>
           {user ? (
-            <>
-              <NextLink href="/dashboard">
-                <a className="mx-2 text-sm sm:block hidden">My Cuentos</a>
-              </NextLink>
-              <button className="mx-2 text-sm font-bold" onClick={() => signout('/')}>
-                Sign Out
-              </button>
-              <NextLink href="/dashboard">
-                <a className="text-sm">
-                  <span className=" inline-flex items-center">
-                    <img src={user?.photoUrl} className="w-8 h-8 object-cover rounded-2xl" />
-                  </span>
-                </a>
-              </NextLink>
-            </>
+            <Link href="/dashboard">
+              <a className="text-sm">
+                <span className=" inline-flex items-center">
+                  <img src={user?.photoUrl} className="w-8 h-8 object-cover rounded-2xl" />
+                </span>
+              </a>
+            </Link>
           ) : (
             <button className="text-sm mx-2" onClick={() => signinWithGoogle('/dashboard')}>
               Sign In
