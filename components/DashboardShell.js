@@ -1,13 +1,14 @@
-import React from 'react'
+import { useAuth } from '../lib/auth'
 import { NextSeo } from 'next-seo'
 import AddCuentoModal from './AddCuentoModal'
 import Nav from './Nav'
 import Footer from './Footer'
 
-const title = 'The Cuentos – Dashboard'
+const title = 'Dashboard – The Cuentos'
 const url = 'https://thecuentos.com/dashboard'
 
 const DashboardShell = ({ children }) => {
+  const { signout } = useAuth()
   return (
     <div className="bg-lightblue min-h-full">
       <NextSeo
@@ -19,15 +20,23 @@ const DashboardShell = ({ children }) => {
         }}
       />
       <Nav />
-      <div className="mt-20 max-w-4xl min-h-1/2 mx-auto">
-        <div className="mx-auto w-full flex flex-col px-8">
-          <div className="flex justify-between mb-8" justifyContent="space-between">
-            <h1 className="text-3xl font-bold">My Cuentos</h1>
+      <main className="px-4 pt-24 max-w-4xl min-h-1/2 mx-auto">
+        <div className="px-4 w-full mx-auto">
+          <h1 className="text-center mb-4 max-w-xl block mx-auto font-sans font-bold tracking-tighter text-4xl sm:text-5xl">
+            My Cuentos
+          </h1>
+          <div className="text-center mb-20">
             <AddCuentoModal>+ Add Cuento</AddCuentoModal>
+            <button
+              className="px-4 py-2 font-bold text-xs sm:text-md text-gray-700 mt-2 ml-2"
+              onClick={() => signout('/')}
+            >
+              Sign Out
+            </button>
           </div>
-          {children}
         </div>
-      </div>
+        {children}
+      </main>
       <Footer />
     </div>
   )

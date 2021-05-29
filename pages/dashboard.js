@@ -1,13 +1,19 @@
+import { useEffect } from 'react'
+import Router from 'next/router'
 import useSWR from 'swr'
-import CuentosListAdmin from '../components/CuentosListAdmin'
+import CuentosList from '../components/CuentosList'
 import DashboardShell from '../components/DashboardShell'
 import Loading from '../components/Loading'
-import fetcher from '../lib/fetcher'
+import firebaseFetcher from '../lib/firebaseFetcher'
 import { useAuth } from '../lib/auth'
 
 const Dashboard = () => {
   const { user } = useAuth()
-  const { data } = useSWR(user ? ['/api/cuentos', user.token] : null, fetcher)
+  const { data } = useSWR(user ? ['/api/cuentos', user.token] : null, firebaseFetcher)
+
+  useEffect(() => {
+    Router.push('/')
+  }, [])
 
   if (!data) {
     return (
@@ -19,7 +25,7 @@ const Dashboard = () => {
 
   return (
     <DashboardShell>
-      {data.cuentos ? <CuentosListAdmin cuentos={data.cuentos} /> : <Loading />}
+      {data.cuentos ? <CuentosList cuentos={data.cuentos} admin={true} /> : <Loading />}
     </DashboardShell>
   )
 }
