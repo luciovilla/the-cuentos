@@ -7,7 +7,7 @@ const CuentosList = ({ cuentos, simple, admin }) => {
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
       {cuentos.map((cuento) => (
         <div className="bg-white p-4 rounded-md shadow-sm" key={cuento.createdAt}>
-          <h3 className="text-sm text-gray-800 font-medium">“{cuento.text}”</h3>
+          <div className="text-sm text-gray-800 font-medium">“{cuento.text}”</div>
           {!simple && (
             <>
               {/* {cuento.name && !admin && <p className="text-sm mt-2">– {cuento.name}</p>} */}
