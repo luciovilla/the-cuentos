@@ -1,24 +1,16 @@
-const title = 'The Cuentos - Advice for and by first-gen Latinos.'
+const title = 'The Cuentos - Advice for first-generation Latinos.'
 const description = 'A community space gathering advice for and by first-generation Latinos.'
+const url = 'https://thecuentos.com'
 
 const SEO = {
   title,
   description,
-  canonical: 'https://thecuentos.com',
+  canonical: url,
   openGraph: {
     type: 'website',
-    locale: 'en_IE',
-    url: 'https://thecuentos.com',
+    url,
     title,
     description,
-    images: [
-      {
-        url: '',
-        alt: title,
-        width: 1280,
-        height: 720,
-      },
-    ],
   },
 }
 

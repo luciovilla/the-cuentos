@@ -5,12 +5,19 @@ import CuentosList from '../components/CuentosList'
 import Footer from '../components/Footer'
 import LoginButton from '../components/LoginButton'
 import Link from 'next/link'
+import { NextSeo } from 'next-seo'
 
 export default function CuentosPage({ allCuentos }) {
   const { user } = useAuth()
 
   return (
     <>
+      <NextSeo
+        title="The Cuentos"
+        openGraph={{ url: 'https://thecuentos.com/all-cuentos' }}
+        canonical="https://thecuentos.com/all-cuentos"
+        description="Latest advice submitted for first-generation Latinos"
+      />
       <Nav />
       <main className="min-h-full bg-lightblue px-4">
         <div className="px-4 w-full mx-auto pt-24">
