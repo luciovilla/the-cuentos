@@ -15,7 +15,7 @@ const DocsLayout = ({ children, title, url, description }) => (
     />
     <div className="bg-lightblue min-h-full">
       <Nav />
-      <div className="max-w-2xl mx-auto mt-40 px-8">{children}</div>
+      <div className="max-w-2xl mx-auto mt-40 px-4">{children}</div>
       <Footer />
     </div>
   </>
