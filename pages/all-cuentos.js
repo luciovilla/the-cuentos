@@ -16,7 +16,7 @@ export default function CuentosPage({ allCuentos }) {
         title="The Cuentos"
         openGraph={{ url: 'https://thecuentos.com/all-cuentos' }}
         canonical="https://thecuentos.com/all-cuentos"
-        description="Latest advice submitted for first-generation Latinos"
+        description="Latest advice submitted for and by first-generation Latinos"
       />
       <Nav />
       <main className="min-h-full bg-lightblue px-4">
