@@ -12,13 +12,13 @@ export default function Home({ allCuentos }) {
   return (
     <>
       <Nav />
-      <main className="min-h-full bg-lightblue">
-        <div className="px-4 w-full mx-auto pt-24">
+      <main className="min-h-full bg-lightblue px-4">
+        <div className="w-full mx-auto pt-24">
           <h1 className="text-center mb-4">
-            <span className="text-lg uppercase font-sans font-semibold text-gray-700 mb-2">
+            <span className="text-md sm:text-lg uppercase font-sans font-semibold text-gray-700 mb-2">
               The Cuentos
             </span>
-            <span className="max-w-xl block mx-auto font-sans font-bold tracking-tighter text-4xl sm:text-5xl">
+            <span className="max-w-xl block mx-auto font-sans font-bold tracking-tighter text-3xl sm:text-5xl">
               A community space gathering advice for and by first-generation Latinos
             </span>
           </h1>
