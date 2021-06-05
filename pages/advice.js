@@ -13,26 +13,26 @@ export default function CuentosPage({ allCuentos }) {
   return (
     <>
       <NextSeo
-        title="The Cuentos"
-        openGraph={{ url: 'https://thecuentos.com/all-cuentos' }}
-        canonical="https://thecuentos.com/all-cuentos"
-        description="Latest advice submitted for and by first-generation Latinos"
+        title="Latest Advice – The Cuentos"
+        openGraph={{ url: 'https://thecuentos.com/advice' }}
+        canonical="https://thecuentos.com/advice"
+        description="Latest advice submitted for first-generation Latinos."
       />
       <Nav />
       <main className="min-h-full bg-lightblue px-4">
         <div className="px-4 w-full mx-auto pt-24">
           <h1 className="text-center mb-2 max-w-xl block mx-auto font-sans font-bold tracking-tighter text-4xl sm:text-5xl">
-            All Cuentos
+            All Advice
           </h1>
           <h2 className="text-center mb-4 text-lg">
-            Latest advice submitted for and by first-generation Latinos
+            Latest advice for first-generation Latinos
           </h2>
           <div className="max-w-xl text-center mx-auto">
             {user ? (
               <Link href="/dashboard">
                 <a>
                   <button className="bg-white ml-4 px-4 py-2 border rounded-md font-bold text-xs sm:text-md text-gray-700 mt-2">
-                    View/Submit Your Cuentos
+                    View/Submit Your Advice
                   </button>
                 </a>
               </Link>

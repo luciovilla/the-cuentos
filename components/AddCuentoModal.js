@@ -60,14 +60,14 @@ const AddCuentoModal = ({ children }) => {
                 <div className="px-4 py-5 bg-white space-y-6 sm:p-6">
                   <div>
                     <label htmlFor="about" className="block text-md font-medium text-gray-700">
-                      Add Cuento
+                      Add Advice
                     </label>
                     <div className="mt-1">
                       <textarea
                         id="about"
                         name="about"
                         className="shadow-sm focus:ring-indigo-500 p-2 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-gray-300 rounded-md"
-                        placeholder="Your cuento..."
+                        placeholder="Tell us your Cuento..."
                         value={text}
                         onChange={(e) => setText(e.target.value)}
                       />

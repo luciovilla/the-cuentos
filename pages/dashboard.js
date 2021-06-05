@@ -13,7 +13,7 @@ const DashboardPage = () => {
   const { user, signout } = useAuth()
   const { data } = useSWR(user ? ['/api/cuentos', user.token] : null, firebaseFetcher)
 
-  const title = 'Dashboard – The Cuentos'
+  const title = 'My Dashboard – The Cuentos'
   const url = 'https://thecuentos.com/dashboard'
   return (
     <>
@@ -30,12 +30,12 @@ const DashboardPage = () => {
         <main className="px-4 pt-24 max-w-4xl min-h-1/2 mx-auto">
           <div className="px-4 w-full mx-auto">
             <h1 className="text-center mb-4 max-w-xl block mx-auto font-sans font-bold tracking-tighter text-4xl sm:text-5xl">
-              My Cuentos
+              My Advice
             </h1>
             <div className="text-center mb-20">
               {user ? (
                 <>
-                  <AddCuentoModal>+ Add Cuento</AddCuentoModal>
+                  <AddCuentoModal>+ Add Advice</AddCuentoModal>
                   <button
                     className="px-4 py-2 font-bold text-xs sm:text-md text-gray-700 mt-2 ml-2"
                     onClick={() => signout('/')}

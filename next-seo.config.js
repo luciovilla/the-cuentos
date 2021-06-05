@@ -1,4 +1,4 @@
-const title = 'The Cuentos - Advice for first-generation Latinos.'
+const title = 'The Cuentos - Advice for first-generation Latinos'
 const description = 'A community space gathering advice for and by first-generation Latinos.'
 const url = 'https://thecuentos.com'
 

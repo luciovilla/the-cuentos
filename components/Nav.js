@@ -24,8 +24,8 @@ const Nav = () => {
           <Link href="/about" passHref>
             <a className="text-sm mx-2">About</a>
           </Link>
-          <Link href="/all-cuentos" passHref>
-            <a className="text-sm mx-2">All Cuentos</a>
+          <Link href="/advice" passHref>
+            <a className="text-sm mx-2">All Advice</a>
           </Link>
           {user ? (
             <Link href="/dashboard">

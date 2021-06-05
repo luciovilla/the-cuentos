@@ -27,17 +27,17 @@ export default function Home({ allCuentos }) {
               <Link href="/dashboard">
                 <a>
                   <button className="bg-white px-4 py-2 border rounded-md font-bold text-xs sm:text-md text-gray-700 mt-2">
-                    View/Submit Your Cuentos
+                    View/Submit Your Advice
                   </button>
                 </a>
               </Link>
             ) : (
               <LoginButton />
             )}
-            <Link href="/all-cuentos">
+            <Link href="/advice">
               <a className="ml-4">
                 <button className="bg-white px-4 py-2 border rounded-md font-bold text-xs sm:text-md text-gray-700 mt-2">
-                  View All Cuentos
+                  View all Advice
                 </button>
               </a>
             </Link>
