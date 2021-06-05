@@ -5,6 +5,7 @@ import Nav from '../components/Nav'
 import CuentosList from '../components/CuentosList'
 import Footer from '../components/Footer'
 import LoginButton from '../components/LoginButton'
+import Newsletter from '../components/Newsletter'
 
 export default function Home({ allCuentos }) {
   const auth = useAuth()
@@ -13,7 +14,7 @@ export default function Home({ allCuentos }) {
     <>
       <Nav />
       <main className="min-h-full bg-lightblue px-4">
-        <div className="w-full mx-auto pt-24">
+        <div className="w-full mx-auto pt-44 mb-44">
           <h1 className="text-center mb-4">
             <span className="text-md sm:text-lg uppercase font-sans font-semibold text-gray-700 mb-2">
               The Cuentos
@@ -42,9 +43,12 @@ export default function Home({ allCuentos }) {
               </a>
             </Link>
           </div>
+          <div className="max-w-4xl center mt-32 mx-auto w-full">
+            <CuentosList cuentos={allCuentos} simple={true} />
+          </div>
         </div>
-        <div className="max-w-4xl center mt-32 mx-auto w-full">
-          <CuentosList cuentos={allCuentos} simple={true} />
+        <div className="max-w-xl mt-10 mx-auto">
+          <Newsletter />
         </div>
         <Footer />
       </main>
