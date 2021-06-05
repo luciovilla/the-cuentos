@@ -20,7 +20,7 @@ const Nav = () => {
           </Link>
         </div>
 
-        <div className="justify-around items-center flex py-4 sm:pr-4">
+        <div className="justify-around items-center flex py-4 pr-2 sm:pr-4">
           <Link href="/about" passHref>
             <a className="text-sm mx-2">About</a>
           </Link>
