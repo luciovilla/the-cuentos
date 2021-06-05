@@ -26,7 +26,7 @@ export default function Home({ allCuentos }) {
             {auth.user ? (
               <Link href="/dashboard">
                 <a>
-                  <button className="bg-white px-4 py-2 border rounded-md font-bold text-xs sm:text-md text-gray-700 mt-2">
+                  <button className="bg-white px-4 py-2 border rounded-md font-semibold text-xs sm:text-md text-gray-700 mt-2">
                     View/Submit Your Advice
                   </button>
                 </a>
@@ -36,7 +36,7 @@ export default function Home({ allCuentos }) {
             )}
             <Link href="/advice">
               <a className="ml-4">
-                <button className="bg-white px-4 py-2 border rounded-md font-bold text-xs sm:text-md text-gray-700 mt-2">
+                <button className="bg-white px-4 py-2 border rounded-md font-semibold text-xs sm:text-md text-gray-700 mt-2">
                   View all Advice
                 </button>
               </a>

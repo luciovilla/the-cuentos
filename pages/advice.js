@@ -24,14 +24,12 @@ export default function CuentosPage({ allCuentos }) {
           <h1 className="text-center mb-2 max-w-xl block mx-auto font-sans font-bold tracking-tighter text-4xl sm:text-5xl">
             All Advice
           </h1>
-          <h2 className="text-center mb-4 text-lg">
-            Latest advice for first-generation Latinos
-          </h2>
+          <h2 className="text-center mb-4 text-lg">Latest advice for first-generation Latinos</h2>
           <div className="max-w-xl text-center mx-auto">
             {user ? (
               <Link href="/dashboard">
                 <a>
-                  <button className="bg-white ml-4 px-4 py-2 border rounded-md font-bold text-xs sm:text-md text-gray-700 mt-2">
+                  <button className="bg-white ml-4 px-4 py-2 border rounded-md font-semibold text-xs sm:text-md text-gray-700 mt-2">
                     View/Submit Your Advice
                   </button>
                 </a>

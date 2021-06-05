@@ -37,7 +37,7 @@ const DashboardPage = () => {
                 <>
                   <AddCuentoModal>+ Add Advice</AddCuentoModal>
                   <button
-                    className="px-4 py-2 font-bold text-xs sm:text-md text-gray-700 mt-2 ml-2"
+                    className="px-4 py-2 font-semibold text-xs sm:text-md text-gray-700 mt-2 ml-2"
                     onClick={() => signout('/')}
                   >
                     Sign Out

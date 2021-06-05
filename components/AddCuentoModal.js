@@ -59,7 +59,7 @@ const AddCuentoModal = ({ children }) => {
               <div className="shadow sm:rounded-md sm:overflow-hidden">
                 <div className="px-4 py-5 bg-white space-y-6 sm:p-6">
                   <div>
-                    <label htmlFor="about" className="block text-md font-medium text-gray-700">
+                    <label htmlFor="about" className="block text-md font-semibold text-gray-700">
                       Add Advice
                     </label>
                     <div className="mt-1">
@@ -77,13 +77,13 @@ const AddCuentoModal = ({ children }) => {
                 <div className="px-4 py-3 bg-white text-right sm:px-6">
                   <button
                     onClick={(e) => handleClose(e)}
-                    className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-xs mr-3 font-bold rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-xs mr-3 font-semibold rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
-                    className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-xs font-bold rounded-md bg-gray-200 hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-xs font-semibold rounded-md bg-gray-200 hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                   >
                     Submit
                   </button>
