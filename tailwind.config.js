@@ -1,16 +1,16 @@
 const { fontFamily } = require('tailwindcss/defaultTheme')
 
 module.exports = {
+  mode: 'jit',
   purge: ['./pages/**/*.js', './components/**/*.js'],
-  darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter', ...fontFamily.sans],
+        sans: ['Inter', ...fontFamily.sans]
       },
       colors: {
-        lightblue: '#ebf2f5',
-      },
+        lightblue: '#ebf2f5'
+      }
     },
     minHeight: {
       0: '0',
@@ -21,11 +21,8 @@ module.exports = {
       75: '75vh',
       80: '80vh',
       85: '85vh',
-      full: '100vh',
-    },
+      full: '100vh'
+    }
   },
-  variants: {
-    extend: {},
-  },
-  plugins: [require('@tailwindcss/typography'), require('@tailwindcss/forms')],
+  plugins: [require('@tailwindcss/typography'), require('@tailwindcss/forms')]
 }
