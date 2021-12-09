@@ -6,8 +6,6 @@ class MyDocument extends Document {
       <Html lang="en">
         <Head>
           <link rel="preload" href="/fonts/inter-var.woff2" as="font" crossOrigin="anonymous" />
-
-          {/* Global Site Tag (gtag.js) - Google Analytics */}
           <script
             async
             src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
@@ -21,7 +19,7 @@ class MyDocument extends Document {
             gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}', {
               page_path: window.location.pathname,
             });
-          `,
+          `
             }}
           />
         </Head>

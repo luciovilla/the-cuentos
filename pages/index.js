@@ -1,14 +1,13 @@
 import Link from 'next/link'
-import { useAuth } from '../lib/auth'
-import { getAllApprovedCuentos } from '../lib/db-admin'
+import prisma from '../lib/prisma'
+import { signIn, useSession } from 'next-auth/react'
 import Nav from '../components/Nav'
 import CuentosList from '../components/CuentosList'
 import Footer from '../components/Footer'
-import LoginButton from '../components/LoginButton'
 import Newsletter from '../components/Newsletter'
 
-export default function Home({ allCuentos }) {
-  const auth = useAuth()
+export default function Home({ data }) {
+  const { data: session } = useSession()
 
   return (
     <>
@@ -19,33 +18,34 @@ export default function Home({ allCuentos }) {
             <span className="text-md sm:text-lg uppercase font-sans font-semibold text-gray-700 mb-2">
               The Cuentos
             </span>
-            <span className="max-w-xl block mx-auto font-sans font-bold tracking-tighter text-3xl sm:text-5xl">
+            <span className="max-w-2xl block mx-auto font-sans font-bold px-2 text-3xl sm:text-5xl">
               A community space gathering advice for and by first-generation Latinos
             </span>
           </h1>
-          <div className="max-w-xl text-center mx-auto">
-            {auth.user ? (
-              <Link href="/dashboard">
-                <a>
-                  <button className="bg-white px-4 py-2 border rounded-md font-semibold text-xs sm:text-md text-gray-700 mt-2">
-                    View/Submit Your Advice
-                  </button>
-                </a>
-              </Link>
-            ) : (
-              <LoginButton />
-            )}
+          <div className="flex items-center justify-center max-w-xl text-center mx-auto">
             <Link href="/advice">
-              <a className="ml-4">
-                <button className="bg-white px-4 py-2 border rounded-md font-semibold text-xs sm:text-md text-gray-700 mt-2">
+              <a>
+                <button className="bg-white px-4 py-2 border rounded-md font-semibold text-xs sm:text-md text-gray-700">
                   View all Advice
                 </button>
               </a>
             </Link>
+            {!session && (
+              <a
+                href="/api/auth/signin/google"
+                className="bg-white ml-3 px-4 py-2 border rounded-md font-semibold text-xs sm:text-md text-gray-700"
+                onClick={(e) => {
+                  e.preventDefault()
+                  signIn('google', {
+                    callbackUrl: `/advice`
+                  })
+                }}
+              >
+                Submit your advice
+              </a>
+            )}
           </div>
-          <div className="max-w-4xl center my-32 mx-auto w-full">
-            <CuentosList cuentos={allCuentos} simple={true} />
-          </div>
+          <CuentosList cuentos={data} simple={true} />
         </div>
         <div className="max-w-xl mt-10 mx-auto">
           <Newsletter />
@@ -57,11 +57,22 @@ export default function Home({ allCuentos }) {
 }
 
 export async function getStaticProps() {
-  const { cuentos } = await getAllApprovedCuentos()
+  const cuentos = await prisma.cuento.findMany({
+    orderBy: {
+      updated_at: 'desc'
+    }
+  })
+
+  const data = cuentos.map((cuento) => ({
+    id: cuento.id.toString(),
+    body: cuento.body,
+    created_by: cuento.created_by.toString(),
+    updated_at: cuento.updated_at.toString()
+  }))
 
   return {
     props: {
-      allCuentos: cuentos,
-    },
+      data
+    }
   }
 }

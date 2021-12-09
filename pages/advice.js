@@ -1,15 +1,11 @@
-import { useAuth } from '../lib/auth'
-import { getAllCuentos } from '../lib/db-admin'
-import Nav from '../components/Nav'
-import CuentosList from '../components/CuentosList'
-import Footer from '../components/Footer'
-import LoginButton from '../components/LoginButton'
 import Link from 'next/link'
+import prisma from '../lib/prisma'
+import Nav from '../components/Nav'
+import Cuento from '../components/Cuento'
+import Footer from '../components/Footer'
 import { NextSeo } from 'next-seo'
 
-export default function CuentosPage({ allCuentos }) {
-  const { user } = useAuth()
-
+export default function CuentosPage({ data }) {
   return (
     <>
       <NextSeo
@@ -20,29 +16,15 @@ export default function CuentosPage({ allCuentos }) {
       />
       <Nav />
       <main className="min-h-full bg-lightblue px-4">
-        <div className="px-4 w-full mx-auto pt-24">
-          <h1 className="text-center mb-2 max-w-xl block mx-auto font-sans font-bold tracking-tighter text-4xl sm:text-5xl">
+        <div className="px-4 w-full mx-auto pt-24 mb-5">
+          <h1 className="text-center mb-2 max-w-xl block mx-auto font-sans font-bold text-4xl sm:text-5xl">
             All Advice
           </h1>
-          <h2 className="text-center mb-4 text-lg">Latest advice for first-generation Latinos</h2>
-          <div className="max-w-xl text-center mx-auto">
-            {user ? (
-              <Link href="/dashboard">
-                <a>
-                  <button className="bg-white ml-4 px-4 py-2 border rounded-md font-semibold text-xs sm:text-md text-gray-700 mt-2">
-                    View/Submit Your Advice
-                  </button>
-                </a>
-              </Link>
-            ) : (
-              <LoginButton />
-            )}
-          </div>
+          <h2 className="text-center">Read all the cuentos submitted</h2>
         </div>
 
-        <div className="max-w-4xl center my-24 mx-auto w-full">
-          <CuentosList cuentos={allCuentos} />
-        </div>
+        <Cuento data={data} />
+
         <Footer />
       </main>
     </>
@@ -50,11 +32,22 @@ export default function CuentosPage({ allCuentos }) {
 }
 
 export async function getStaticProps() {
-  const { cuentos } = await getAllCuentos()
+  const cuentos = await prisma.cuento.findMany({
+    orderBy: {
+      updated_at: 'desc'
+    }
+  })
+
+  const data = cuentos.map((cuento) => ({
+    id: cuento.id.toString(),
+    body: cuento.body,
+    created_by: cuento.created_by.toString(),
+    updated_at: cuento.updated_at.toString()
+  }))
 
   return {
     props: {
-      allCuentos: cuentos,
-    },
+      data
+    }
   }
 }

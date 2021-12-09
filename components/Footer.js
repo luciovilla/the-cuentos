@@ -9,12 +9,6 @@ const Footer = () => {
       <NextLink href="/about">
         <a className="text-sm mr-4 text-gray-600">About</a>
       </NextLink>
-      <NextLink href="/privacy-policy">
-        <a className="text-sm mr-4 text-gray-600">Privacy Policy</a>
-      </NextLink>
-      <NextLink href="/terms">
-        <a className="text-sm mr-4 text-gray-600">Terms</a>
-      </NextLink>
     </div>
   )
 }
