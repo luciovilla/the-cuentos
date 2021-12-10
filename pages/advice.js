@@ -20,7 +20,9 @@ export default function CuentosPage({ data }) {
           <h1 className="text-center mb-2 max-w-xl block mx-auto font-sans font-bold text-4xl sm:text-5xl">
             All Advice
           </h1>
-          <h2 className="text-center">Read all the cuentos submitted</h2>
+          <h2 className="text-center">
+            Read all submitted advice below and make sure to leave your <i>Cuento</i> too!
+          </h2>
         </div>
 
         <Cuento data={data} />

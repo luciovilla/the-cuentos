@@ -18,8 +18,8 @@ export default function Home({ data }) {
             <span className="text-md sm:text-lg uppercase font-sans font-semibold text-gray-700 mb-2">
               The Cuentos
             </span>
-            <span className="max-w-2xl block mx-auto font-sans font-bold px-2 text-3xl sm:text-5xl">
-              A community space gathering advice for and by first-generation Latinos
+            <span className="max-w-xl block mx-auto font-sans font-bold px-2 text-3xl sm:text-5xl">
+              A community space gathering advice for first-generation Latinos
             </span>
           </h1>
           <div className="flex items-center justify-center max-w-xl text-center mx-auto">

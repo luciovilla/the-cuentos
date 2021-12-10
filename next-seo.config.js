@@ -1,5 +1,5 @@
 const title = 'Advice for first-generation Latinos – The Cuentos'
-const description = 'A community space gathering advice for and by first-generation Latinos.'
+const description = 'A community space gathering advice for first-generation Latinos.'
 const url = 'https://thecuentos.com'
 
 const SEO = {
@@ -10,8 +10,8 @@ const SEO = {
     type: 'website',
     url,
     title,
-    description,
-  },
+    description
+  }
 }
 
 export default SEO
