@@ -5,9 +5,14 @@ import Nav from '../components/Nav'
 import CuentosList from '../components/CuentosList'
 import Footer from '../components/Footer'
 import Newsletter from '../components/Newsletter'
+import useSWR from 'swr'
+import fetcher from '../lib/fetcher'
 
 export default function Home({ data }) {
   const { data: session } = useSession()
+  const { data: cuentos } = useSWR('/api/cuentos?amount=3&sort=asc', fetcher, {
+    data
+  })
 
   return (
     <>
@@ -45,7 +50,7 @@ export default function Home({ data }) {
               </a>
             )}
           </div>
-          <CuentosList cuentos={data} simple={true} />
+          {cuentos && <CuentosList cuentos={cuentos} />}
         </div>
         <div className="max-w-xl mt-10 mx-auto">
           <Newsletter />
@@ -58,8 +63,9 @@ export default function Home({ data }) {
 
 export async function getStaticProps() {
   const cuentos = await prisma.cuento.findMany({
+    take: 2,
     orderBy: {
-      updated_at: 'desc'
+      updated_at: 'asc'
     }
   })
 

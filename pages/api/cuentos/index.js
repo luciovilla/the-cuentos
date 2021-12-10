@@ -3,9 +3,11 @@ import prisma from '../../../lib/prisma'
 
 export default async function handler(req, res) {
   if (req.method === 'GET') {
+    const { amount, sort } = req.query
     const cuentos = await prisma.cuento.findMany({
+      take: amount ? parseInt(amount) : undefined,
       orderBy: {
-        updated_at: 'desc'
+        updated_at: sort ? 'asc' : 'desc'
       }
     })
 

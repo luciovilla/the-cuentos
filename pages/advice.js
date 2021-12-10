@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import prisma from '../lib/prisma'
 import Nav from '../components/Nav'
 import Cuento from '../components/Cuento'
