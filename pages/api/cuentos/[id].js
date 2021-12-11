@@ -18,7 +18,8 @@ export default async function handler(req, res) {
       id: cuento.id.toString(),
       body: cuento.body,
       created_by: cuento.created_by,
-      updated_at: cuento.updated_at
+      updated_at: cuento.updated_at,
+      image: cuento.image
     })
   }
 
@@ -53,6 +54,6 @@ export default async function handler(req, res) {
       body
     })
   }
-  
+
   return res.send('Method no allowed.')
 }

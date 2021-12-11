@@ -16,13 +16,14 @@ export default async function handler(req, res) {
         id: cuento.id.toString(),
         body: cuento.body,
         created_by: cuento.created_by,
-        updated_at: cuento.updated_at
+        updated_at: cuento.updated_at,
+        image: cuento.image
       }))
     )
   }
 
   const session = await getSession({ req })
-  const { email, name } = session.user
+  const { email, name, image } = session.user
 
   if (!session) {
     return res.status(403).send('Unauthorized')
@@ -33,14 +34,16 @@ export default async function handler(req, res) {
       data: {
         email,
         body: (req.body.body || '').slice(0, 500),
-        created_by: name
+        created_by: name,
+        image
       }
     })
     return res.status(200).json({
       id: newCuento.id.toString,
       body: newCuento.body,
       created_by: newCuento.created_by,
-      updated_at: newCuento.updated_at
+      updated_at: newCuento.updated_at,
+      image: newCuento.image
     })
   }
   return res.send('Method not allowed.')

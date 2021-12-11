@@ -31,10 +31,11 @@ export default function Home({ data }) {
             <Link href="/advice">
               <a>
                 <button className="bg-white px-4 py-2 border rounded-md font-semibold text-xs sm:text-md text-gray-700">
-                  View all Advice
+                  View/Submit Advice
                 </button>
               </a>
             </Link>
+            
             {!session && (
               <a
                 href="/api/auth/signin/google"
@@ -69,12 +70,7 @@ export async function getStaticProps() {
     }
   })
 
-  const data = cuentos.map((cuento) => ({
-    id: cuento.id.toString(),
-    body: cuento.body,
-    created_by: cuento.created_by.toString(),
-    updated_at: cuento.updated_at.toString()
-  }))
+  const data = JSON.stringify(cuentos)
 
   return {
     props: {

@@ -39,12 +39,7 @@ export async function getStaticProps() {
     }
   })
 
-  const data = cuentos.map((cuento) => ({
-    id: cuento.id.toString(),
-    body: cuento.body,
-    created_by: cuento.created_by.toString(),
-    updated_at: cuento.updated_at.toString()
-  }))
+  const data = JSON.stringify(cuentos)
 
   return {
     props: {
