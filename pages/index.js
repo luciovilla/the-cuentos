@@ -1,6 +1,5 @@
 import Link from 'next/link'
 import prisma from '../lib/prisma'
-import { signIn, useSession } from 'next-auth/react'
 import Nav from '../components/Nav'
 import CuentosList from '../components/CuentosList'
 import Footer from '../components/Footer'
@@ -9,7 +8,6 @@ import useSWR from 'swr'
 import fetcher from '../lib/fetcher'
 
 export default function Home({ data }) {
-  const { data: session } = useSession()
   const { data: cuentos } = useSWR('/api/cuentos?amount=3&sort=asc', fetcher, {
     data
   })
