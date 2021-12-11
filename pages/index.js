@@ -35,21 +35,6 @@ export default function Home({ data }) {
                 </button>
               </a>
             </Link>
-            
-            {!session && (
-              <a
-                href="/api/auth/signin/google"
-                className="bg-white ml-3 px-4 py-2 border rounded-md font-semibold text-xs sm:text-md text-gray-700"
-                onClick={(e) => {
-                  e.preventDefault()
-                  signIn('google', {
-                    callbackUrl: `/advice`
-                  })
-                }}
-              >
-                Submit your advice
-              </a>
-            )}
           </div>
           {cuentos && <CuentosList cuentos={cuentos} />}
         </div>
