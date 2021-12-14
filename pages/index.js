@@ -7,16 +7,16 @@ import Newsletter from '../components/Newsletter'
 import useSWR from 'swr'
 import fetcher from '../lib/fetcher'
 
-export default function Home({ data }) {
+export default function Home({ fallbackData }) {
   const { data: cuentos } = useSWR('/api/cuentos?amount=3&sort=asc', fetcher, {
-    data
+    fallbackData
   })
 
   return (
     <>
       <Nav />
       <main className="min-h-full bg-lightblue px-4">
-        <div className="w-full mx-auto pt-44">
+        <div className="w-full mx-auto pt-36">
           <h1 className="text-center mb-4">
             <span className="text-md sm:text-lg uppercase font-sans font-semibold text-gray-700 mb-2">
               The Cuentos
@@ -47,17 +47,23 @@ export default function Home({ data }) {
 
 export async function getStaticProps() {
   const cuentos = await prisma.cuento.findMany({
-    take: 2,
+    take: 3,
     orderBy: {
       updated_at: 'asc'
     }
   })
 
-  const data = JSON.stringify(cuentos)
+  const fallbackData = cuentos.map((entry) => ({
+    id: entry.id,
+    body: entry.body,
+    created_by: entry.created_by.toString(),
+    updated_at: entry.updated_at.toString(),
+    image: entry.image.toString()
+  }))
 
   return {
     props: {
-      data
+      fallbackData
     }
   }
 }

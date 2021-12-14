@@ -4,7 +4,7 @@ import Cuento from '../components/Cuento'
 import Footer from '../components/Footer'
 import { NextSeo } from 'next-seo'
 
-export default function CuentosPage({ data }) {
+export default function CuentosPage({ fallbackData }) {
   return (
     <>
       <NextSeo
@@ -24,7 +24,7 @@ export default function CuentosPage({ data }) {
           </h2>
         </div>
 
-        <Cuento data={data} />
+        <Cuento data={fallbackData} />
 
         <Footer />
       </main>
@@ -39,11 +39,17 @@ export async function getStaticProps() {
     }
   })
 
-  const data = JSON.stringify(cuentos)
+  const fallbackData = cuentos.map((entry) => ({
+    id: entry.id,
+    body: entry.body,
+    created_by: entry.created_by.toString(),
+    updated_at: entry.updated_at.toString(),
+    image: entry.image.toString()
+  }))
 
   return {
     props: {
-      data
+      fallbackData
     }
   }
 }

@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react'
 import { signIn, signOut, useSession } from 'next-auth/react'
 import useSWR, { useSWRConfig } from 'swr'
+import Link from 'next/link'
 
 import fetcher from '../lib/fetcher'
 import SuccessMessage from './SuccessMessage'
@@ -9,7 +10,7 @@ import LoadingSpinner from './LoadingSpinner'
 
 function CuentoEntry({ cuento, user }) {
   const { mutate } = useSWRConfig()
-  const deleteEntry = async () => {
+  const deleteCuento = async () => {
     await fetch(`/api/cuentos/${cuento.id}`, {
       method: 'DELETE'
     })
@@ -22,7 +23,7 @@ function CuentoEntry({ cuento, user }) {
         <div className="text-lg text-gray-700">{cuento.body}</div>
         {user && cuento.created_by === user.name && (
           <div className="flex items-center space-x-3 mt-4">
-            <button className="text-sm text-red-600" onClick={deleteEntry}>
+            <button className="text-sm text-red-600" onClick={deleteCuento}>
               Delete
             </button>
           </div>
@@ -43,16 +44,16 @@ function CuentoEntry({ cuento, user }) {
   )
 }
 
-export default function Cuento({ data }) {
+export default function Cuento({ fallbackData }) {
   const { data: session } = useSession()
   const { mutate } = useSWRConfig()
   const [form, setForm] = useState({ state: '', message: '' })
   const inputEl = useRef(null)
   const { data: cuentos } = useSWR('/api/cuentos', fetcher, {
-    data
+    fallbackData
   })
 
-  const leaveEntry = async (e) => {
+  const leaveCuento = async (e) => {
     e.preventDefault()
     setForm({ state: 'Loading' })
     const res = await fetch('/api/cuentos', {
@@ -88,20 +89,21 @@ export default function Cuento({ data }) {
         <h5 className="text-lg md:text-xl font-bold text-gray-900">Submit a Cuento</h5>
         <p className="my-1 text-gray-800 mb-4">Share some advice for first-generation Latinos.</p>
         {!session && (
-          <a
-            href="/api/auth/signin/google"
-            className="bg-white px-4 py-2 border rounded-md font-semibold text-xs sm:text-md text-gray-700"
-            onClick={(e) => {
-              e.preventDefault()
-              signIn('google')
-            }}
-          >
-            {form.state === 'Loading' ? <LoadingSpinner /> : 'Sign in with Google'}
-          </a>
+          <Link href="/api/auth/signin/google">
+            <a
+              className="bg-white px-4 py-2 border rounded-md font-semibold text-xs sm:text-md text-gray-700"
+              onClick={(e) => {
+                e.preventDefault()
+                signIn('google')
+              }}
+            >
+              {form.state === 'Loading' ? <LoadingSpinner /> : 'Sign in with Google'}
+            </a>
+          </Link>
         )}
 
         {session?.user && (
-          <form onSubmit={leaveEntry} className="my-4 max-w-xl center mx-auto w-full">
+          <form onSubmit={leaveCuento} className="my-4 max-w-xl center mx-auto w-full">
             <textarea
               ref={inputEl}
               type="text"
