@@ -12,18 +12,18 @@ export default function Subscribe() {
     setForm({ state: 'loading' })
     const res = await fetch('/api/newsletter-subscribe', {
       body: JSON.stringify({
-        email: inputEl.current.value,
+        email: inputEl.current.value
       }),
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
-      method: 'POST',
+      method: 'POST'
     })
     const { error } = await res.json()
     if (error) {
       setForm({
         state: 'error',
-        message: error,
+        message: error
       })
       return
     }
@@ -31,7 +31,7 @@ export default function Subscribe() {
     inputEl.current.value = ''
     setForm({
       state: 'success',
-      message: `Hooray! You're now on the list.`,
+      message: `Hooray! You're now on the list.`
     })
   }
 
@@ -49,7 +49,7 @@ export default function Subscribe() {
           type="email"
           autoComplete="email"
           required
-          className="px-4 py-2 mt-1 focus:ring-blue-50 focus:border-blue-50 block w-full border-gray-300 rounded-md bg-white text-gray-900"
+          className="px-4 py-2 mt-1 focus:ring-blue-50 focus:border-blue-50 block w-full border border-gray-300 rounded-md bg-white text-gray-900"
         />
         <button
           className="flex items-center justify-center absolute right-1 top-1 px-4 font-semibold h-8 bg-gray-100 text-gray-900 rounded w-28"

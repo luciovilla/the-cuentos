@@ -1,8 +1,7 @@
 const { fontFamily } = require('tailwindcss/defaultTheme')
 
 module.exports = {
-  mode: 'jit',
-  purge: ['./pages/**/*.js', './components/**/*.js'],
+  content: ['./pages/**/*.js', './components/**/*.js'],
   theme: {
     extend: {
       fontFamily: {
@@ -23,6 +22,5 @@ module.exports = {
       85: '85vh',
       full: '100vh'
     }
-  },
-  plugins: [require('@tailwindcss/typography'), require('@tailwindcss/forms')]
+  }
 }
